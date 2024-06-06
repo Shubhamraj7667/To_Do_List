@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="asset/style.css">
+
+    <!-- Font Awesome -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.0/mdb.min.css"
+rel="stylesheet"
+/>
+</head>
+<body>
+
+    <!-- Edit model-->
+    <div class="modal fade" id="ToDOEditModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <input type = "hidden" id = "id_edit">
+        
+                    <div class="col-md-12">
+                      <div class="error-message-update">
+        
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      
+                      <label for="">Work</label>
+                      <input type="text" id ="edit_to_do"  class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="">Due Date</label>
+                      <input type="text" id ="edit_due_date" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="">Priority</label>
+                      <input type="text" id ="edit_priority" class="form-control">
+                    </div>
+                    
+                  </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary update_ajax edit_btn">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <section class="vh-100">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+              <div class="card" id="list1" style="border-radius: .75rem; background-color: #eff1f2;">
+                <div class="card-body py-4 px-4 px-md-5">
+      
+                  <p class="h1 text-center mt-3 mb-4 pb-3 text-primary">
+                    <i class="fas fa-check-square me-1"></i>
+                    <u>My Todo-s</u>
+                  </p>
+      
+                  <div class="pb-2">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="d-flex flex-row align-items-center">
+                          <input type="text" class="form-control form-control-lg" id="exampleFormControlInput1"
+                            placeholder="Add new...">
+                          <a href="#!" data-mdb-tooltip-init title="Set due date"><i
+                              class="fas fa-calendar-alt fa-lg me-3"></i></a>
+                          <div>
+                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary">Add</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+      
+                  <hr class="my-4">
+      
+                  <div class="d-flex justify-content-end align-items-center mb-4 pt-2 pb-3">
+                    <p class="small mb-0 me-2 text-muted">Filter</p>
+                    <select data-mdb-select-init>
+                      <option value="1">All</option>
+                      <option value="2">Completed</option>
+                      <option value="3">Active</option>
+                      <option value="4">Has due date</option>
+                    </select>
+                    <p class="small mb-0 ms-4 me-2 text-muted">Sort</p>
+                    <select data-mdb-select-init>
+                      <option value="1">Added date</option>
+                      <option value="2">Due date</option>
+                    </select>
+                    <a href="#!" style="color: #23af89;" data-mdb-tooltip-init title="Ascending"><i
+                        class="fas fa-sort-amount-down-alt ms-2"></i></a>
+                  </div>
+                  <div class="message-show">
+
+                  </div>
+      <div class="todo_list">
+                  <ul class="list-group list-group-horizontal rounded-0 bg-transparent">
+                    <li
+                      class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
+                      <div class="form-check">
+                        <input class="form-check-input me-0" type="checkbox" value="" id="flexCheckChecked1"
+                          aria-label="..." checked />
+                      </div>
+                    </li>
+                    <li
+                      class="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
+                      <p class="lead fw-normal mb-0">Buy groceries for next week</p>
+                    </li>
+                    <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
+                      <div class="d-flex flex-row justify-content-end mb-1">
+                        <a href="#!" class="text-info" data-mdb-tooltip-init title="Edit todo"><i
+                            class="fas fa-pencil-alt me-3"></i></a>
+                        <a href="#!" class="text-danger" data-mdb-tooltip-init title="Delete todo"><i
+                            class="fas fa-trash-alt"></i></a>
+                      </div>
+                      <div class="text-end text-muted">
+                        <a href="#!" class="text-muted" data-mdb-tooltip-init title="Created date">
+                          <p class="small mb-0"><i class="fas fa-info-circle me-2"></i>28th Jun 2020</p>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                  <ul class="list-group list-group-horizontal rounded-0">
+                    <li
+                      class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
+                      <div class="form-check">
+                        <input class="form-check-input me-0" type="checkbox" value="" id="flexCheckChecked2"
+                          aria-label="..." />
+                      </div>
+                    </li>
+                    <li
+                      class="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
+                      <p class="lead fw-normal mb-0">Renew car insurance</p>
+                    </li>
+                    <li class="list-group-item px-3 py-1 d-flex align-items-center border-0 bg-transparent">
+                      <div
+                        class="py-2 px-3 me-2 border border-warning rounded-3 d-flex align-items-center bg-body-tertiary">
+                        <p class="small mb-0">
+                          <a href="#!" data-mdb-tooltip-init title="Due on date">
+                            <i class="fas fa-hourglass-half me-2 text-warning"></i>
+                          </a>
+                          28th Jun 2020
+                        </p>
+                      </div>
+                    </li>
+                    <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
+                      <div class="d-flex flex-row justify-content-end mb-1">
+                        <a href="#!" class="text-info" data-mdb-tooltip-init title="Edit todo"><i
+                            class="fas fa-pencil-alt me-3"></i></a>
+                        <a href="#!" class="text-danger" data-mdb-tooltip-init title="Delete todo"><i
+                            class="fas fa-trash-alt"></i></a>
+                      </div>
+                      <div class="text-end text-muted">
+                        <a href="#!" class="text-muted" data-mdb-tooltip-init title="Created date">
+                          <p class="small mb-0"><i class="fas fa-info-circle me-2"></i>28th Jun 2020</p>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                  <ul class="list-group list-group-horizontal rounded-0 mb-2">
+                    <li
+                      class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
+                      <div class="form-check">
+                        <input class="form-check-input me-0" type="checkbox" value="" id="flexCheckChecked3"
+                          aria-label="..." />
+                      </div>
+                    </li>
+                    <li
+                      class="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
+                      <p class="lead fw-normal mb-0 bg-body-tertiary w-100 ms-n2 ps-2 py-1 rounded">Sign up for online
+                        course</p>
+                    </li>
+                    <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
+                      <div class="d-flex flex-row justify-content-end mb-1">
+                        <a href="#!" class="text-danger" data-mdb-tooltip-init title="Delete todo"><i
+                            class="fas fa-trash-alt"></i></a>
+                      </div>
+                      <div class="text-end text-muted">
+                        <a href="#!" class="text-muted" data-mdb-tooltip-init title="Created date">
+                          <p class="small mb-0"><i class="fas fa-info-circle me-2"></i>28th Jun 2020</p>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+
+                </div>
+      
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+
+      <script>
+        $(document).ready(function(){
+            getdata();
+
+
+            //for delete
+            $(document).on("click",".delete_btn",function(){
+                var todo_id = $('toto_id').val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "asset/code.php",
+                    data: {
+                        'checking_delete':true,
+                        'todo_id':todo_id,
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        $('.message-show').append('<div class="alert alert-success alert-dismissible fade show" role="alert"> <strong>Hey! </strong> '+response+'.<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+           
+
+                        $('.todo_list').html();
+
+                         getdata();
+                        
+                    }
+                });
+            })
+             
+            <!--for edit--> 
+            $(document).on("click",".edit_btn", function(){
+
+                var todo_id = $('.todo_id').val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "asset/code.php",
+                    data: {
+                        'checking_edit': true,
+                        'todo_id': todo_id,
+                    },
+                    success: function (response) {
+                        console.log("response",response);
+                        $.each(response, function (key, studedit) { 
+              $('#id_edit').val(studedit['id']);
+              $('#edit_to_do').val(studedit['to_do']);
+              $('#edit_due_date').val(studedit['due_date']);
+              $('#edit_priority').val(studedit['priority']);
+            });
+            $('#ToDOEditModel').modal('show');
+                        
+                    }
+                });
+                
+            })
+
+
+        });
+
+
+       function getdata(){
+
+        $.ajax({
+            type: "GET",
+            url: "asset/fetch.php",
+            success: function (response) {
+                console.log(response);
+                $.each(response, function(key,value){
+                    $('.todo_list').append('<ul class="list-group list-group-horizontal rounded-0 mb-2">'
+                   +' <li'
+                    +'  class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">'
+                    +'  <div class="form-check">'
+                    +'    <input class="form-check-input me-0" type="checkbox" value="" id="flexCheckChecked3"'
+                    +'      aria-label="..." />'
+                    +'  </div>'
+                    +'<input type = "hidden" class = "todo_id" value = "'+value['id']+'">'
+                  +'  </li>'
+                  +'  <li'
+                   +'   class="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">'
+                  +  '  <p class="lead fw-normal mb-0">'+ value['to_do']+ ''
+                  +'      </p>'
+                  +'  </li>'
+                  +'  <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">'
+                 +'     <div class="d-flex flex-row justify-content-end mb-1">'
+                  +'      <a href="#!" class="text-info  edit_btn " data-bs-toggle="modal" data-bs-target="#ToDOEditModel" data-mdb-tooltip-init title="Edit todo"><i'
+                  +'          class="fas fa-pencil-alt me-3"></i></a>'
+                  +'      <a href="#!" class="text-danger delete_btn" data-mdb-tooltip-init title="Delete todo"><i'
+                  +'          class="fas fa-trash-alt"></i></a>'
+                  +'    </div>'
+                  +'    <div class="text-end text-muted">'
+                  +'      <a href="#!" class="text-muted" data-mdb-tooltip-init title="Created date">'
+                  +'        <p class="small mb-0"><i class="fas fa-info-circle me-2"></i>'+value['updated_at']+'</p>'
+                  +'      </a>'
+                  +'    </div>'
+                  +'  </li>'
+                 +' </ul>'
+                    )
+                })
+                
+            }
+        });
+       }
+
+
+      </script>
+    
+</body>
+</html>
