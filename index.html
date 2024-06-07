@@ -81,12 +81,13 @@ rel="stylesheet"
                     <div class="card">
                       <div class="card-body">
                         <div class="d-flex flex-row align-items-center">
-                          <input type="text" class="form-control form-control-lg" id="exampleFormControlInput1"
+                          <input type="text" class="form-control form-control-lg " id="to_do"
                             placeholder="Add new...">
-                          <a href="#!" data-mdb-tooltip-init title="Set due date"><i
-                              class="fas fa-calendar-alt fa-lg me-3"></i></a>
+                          <a href="#!" data-mdb-tooltip-init title="Set due date">
+                            <input type="date" name="" id="due_date"><i
+                              class="fas fa-calendar-alt fa-lg me-3 "></i></a>
                           <div>
-                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary">Add</button>
+                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary todo_add_ajax">Add</button>
                           </div>
                         </div>
                       </div>
@@ -115,7 +116,7 @@ rel="stylesheet"
 
                   </div>
       <div class="todo_list">
-                  <ul class="list-group list-group-horizontal rounded-0 bg-transparent">
+                  <!-- <ul class="list-group list-group-horizontal rounded-0 bg-transparent">
                     <li
                       class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
                       <div class="form-check">
@@ -202,7 +203,7 @@ rel="stylesheet"
                         </a>
                       </div>
                     </li>
-                  </ul>
+                  </ul> -->
 
                 </div>
       
@@ -224,9 +225,40 @@ rel="stylesheet"
             getdata();
 
 
+            //for add
+  
+            $('.todo_add_ajax').click(function(e){
+              e.preventDefault();
+
+              var to_do = $('#to_do').val();
+              var due_date = $('#due_date').val();
+
+              if(to_do != '' & due_date != ''){
+                $.ajax({
+                  type: "POST",
+                  url: "asset/code.php",
+                  data: {
+                    'checking_add':true,
+                    'to_do':to_do,
+                    'due_date':due_date,
+                  },
+                  success: function (response) {
+                    $('.message-show').append('<div class="alert alert-success alert-dismissible fade show" role="alert"> <strong>Hey! </strong> '+response+'.<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+                    
+                  }
+                });
+              }else{
+                $('.error-message').append('<div class="alert alert-warning alert-dismissible fade show" role="alert"> <strong>Hey!</strong> Please enter all fields.<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+              }
+              
+            })
+
+
             //for delete
             $(document).on("click",".delete_btn",function(){
-                var todo_id = $('toto_id').val();
+                // var todo_id = $('.todo_id').val();
+                var todo_id = $(this).data("id")
+                console.log(todo_id,'fvfv');
 
                 $.ajax({
                     type: "POST",
@@ -240,7 +272,7 @@ rel="stylesheet"
                         $('.message-show').append('<div class="alert alert-success alert-dismissible fade show" role="alert"> <strong>Hey! </strong> '+response+'.<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
            
 
-                        $('.todo_list').html();
+                        $('.todo_list').html('');
 
                          getdata();
                         
@@ -305,7 +337,7 @@ rel="stylesheet"
                  +'     <div class="d-flex flex-row justify-content-end mb-1">'
                   +'      <a href="#!" class="text-info  edit_btn " data-bs-toggle="modal" data-bs-target="#ToDOEditModel" data-mdb-tooltip-init title="Edit todo"><i'
                   +'          class="fas fa-pencil-alt me-3"></i></a>'
-                  +'      <a href="#!" class="text-danger delete_btn" data-mdb-tooltip-init title="Delete todo"><i'
+                  +'      <a href="#!" class="text-danger delete_btn" data-id = "'+value['id']+'" data-mdb-tooltip-init title="Delete todo"><i'
                   +'          class="fas fa-trash-alt"></i></a>'
                   +'    </div>'
                   +'    <div class="text-end text-muted">'
@@ -324,6 +356,8 @@ rel="stylesheet"
 
 
       </script>
+
+
     
 </body>
 </html>
